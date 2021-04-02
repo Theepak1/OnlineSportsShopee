@@ -1,5 +1,8 @@
 package com.capg.onlinesportsshopee.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PaymentDTO {
 	
 	private long paymentId;

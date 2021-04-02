@@ -1,25 +1,42 @@
 package com.capg.onlinesportsshopee.bean;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-
+import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity
-public class Card {
+@Table(name = "card")
+public class Card implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private long id;
 	
+	@Column(name = "card_name")
+	@NotBlank(message = "Card Name Should Not Be Blank")
 	private String cardName;
 	
+	@Column(name = "card_number")
+	@NotNull(message = "Card Number Should Not Be Null")
 	private String cardNumber;
     
+	@Column(name = "card_expiry")
+	@NotBlank(message = "Card Expiry Should Not Be Blank")
 	private LocalDate cardExpiry;
     
+	@Column(name = "cvv")
+	@NotNull(message = "Card Cvv Number Should Not Be Null")
 	private int cvv;
 	
 	public Card() {

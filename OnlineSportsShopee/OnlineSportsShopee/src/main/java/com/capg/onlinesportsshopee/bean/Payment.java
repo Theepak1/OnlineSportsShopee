@@ -1,24 +1,42 @@
 package com.capg.onlinesportsshopee.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import com.sun.istack.NotNull;
 
 @Entity
-public class Payment {
+@Table(name = "payment" )
+public class Payment implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "paymentId")
 	private long paymentId;
 	
+	@Column(name = "type")
+	@NotBlank(message = "Payment type Should Be Blank")
 	private String type;
 	
+	@Column(name = "status")
+	@NotBlank(message = "Payment Status Should Be Blank")
 	private String status;
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToOne(cascade= {CascadeType.ALL},fetch=FetchType.EAGER)
+	@JoinColumn(name="card_id",referencedColumnName = "ID")
 	private Card card;
 	
 	public Payment() {
@@ -69,9 +87,4 @@ public class Payment {
 	public String toString() {
 		return "Payment [paymentId=" + paymentId + ", type=" + type + ", status=" + status + ", card=" + card + "]";
 	}
-
-	
-	
-	
-	
 }
