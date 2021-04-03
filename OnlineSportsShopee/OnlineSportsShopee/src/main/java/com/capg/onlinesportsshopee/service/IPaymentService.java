@@ -7,7 +7,7 @@ import com.capg.onlinesportsshopee.model.PaymentDTO;
 
 public interface IPaymentService {
 	public PaymentDTO addPayment(Payment payment);
-	public void removePayment(long paymentId);
+	public PaymentDTO removePayment(long paymentId);
 	public PaymentDTO updatePayment(long paymentId ,Payment payment);
 	public PaymentDTO getPaymentDetails(long paymentId);
 	public List<PaymentDTO> getAllPaymentDetails();

@@ -1,6 +1,7 @@
 package com.capg.onlinesportsshopee.bean;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.sun.istack.NotNull;
-
 @Entity
 @Table(name = "payment" )
 public class Payment implements Serializable{
@@ -28,11 +27,11 @@ public class Payment implements Serializable{
 	private long paymentId;
 	
 	@Column(name = "type")
-	@NotBlank(message = "Payment type Should Be Blank")
+	@NotBlank(message = "Payment type Should Not Be Blank")
 	private String type;
 	
 	@Column(name = "status")
-	@NotBlank(message = "Payment Status Should Be Blank")
+	@NotBlank(message = "Payment Status Should Not Be Blank")
 	private String status;
 	
 	@ManyToOne(cascade= {CascadeType.ALL},fetch=FetchType.EAGER)
@@ -43,12 +42,13 @@ public class Payment implements Serializable{
 		super();
 	}
 
-	public Payment(long paymentId, String type, String status, Card card) {
+	public Payment(long paymentId,String type, String status, long id,String cardName, String cardNumber, LocalDate expiryDate, int cvv) {
 		super();
-		this.paymentId = paymentId;
+		this.card = new Card(id,cardName,cardNumber,expiryDate,cvv);
+		this.paymentId=paymentId;
 		this.type = type;
 		this.status = status;
-		this.card = card;
+		
 	}
 
 	public long getPaymentId() {
