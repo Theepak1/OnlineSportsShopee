@@ -86,7 +86,7 @@ public class PaymentServiceImp implements IPaymentService {
 
 	public static boolean validatePaymentType(Payment payment) {
 		boolean flag = false;
-		if (Pattern.matches("^[a-z][A-Z]&", payment.getType())) {
+		if (Pattern.matches("^[A-Za-z]+$", payment.getType())) {
 			flag = true;
 		} else {
 			flag = false;
@@ -96,7 +96,7 @@ public class PaymentServiceImp implements IPaymentService {
 
 	public static boolean validatePaymentStatus(Payment payment) {
 		boolean flag = false;
-		if (Pattern.matches("^[a-z][A-Z]&", payment.getStatus())) {
+		if (Pattern.matches("^[A-Za-z]+$", payment.getStatus())) {
 			flag = true;
 		} else {
 			flag = false;
@@ -117,7 +117,7 @@ public class PaymentServiceImp implements IPaymentService {
 	public static boolean validateCardNumber(Payment payment) {
 		boolean flag = false;
 		if (payment.getCard().getCardNumber().length() == 16
-				&& Pattern.matches("^[0-9]&", payment.getCard().getCardNumber())) {
+				&& Pattern.matches("^[0-9]+&", payment.getCard().getCardNumber())) {
 			flag = true;
 		} else {
 			flag = false;

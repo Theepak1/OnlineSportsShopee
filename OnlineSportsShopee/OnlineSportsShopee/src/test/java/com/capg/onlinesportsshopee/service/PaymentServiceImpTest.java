@@ -3,22 +3,20 @@ package com.capg.onlinesportsshopee.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.capg.onlinesportsshopee.bean.Payment;
 
 class PaymentServiceImpTest {
 	
 	@Autowired
 	IPaymentService paymentService;
+	
+	@Autowired
+	PaymentServiceImp service;
 	
 	List<Payment> list = new ArrayList<>();
 
@@ -41,47 +39,76 @@ class PaymentServiceImpTest {
 
 	@Test
 	void testUpdatePayment() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(6,"debit","paid",6,"SyedSamsudeen","124",expiryDate,125);
+		assertEquals(payment1,paymentService.addPayment(payment1));
+		expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment2=new Payment(6,"debit","paid",7,"samsudeen","124",expiryDate,369);
+		list.add(payment2);
+		assertEquals(payment2,paymentService.updatePayment(6,payment2));
+		//paymentService.removePayment(6);
 	}
 
 	@Test
 	void testGetPaymentDetails() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(9,"debit","paid",6,"Samsusyed","124",expiryDate,158);
+		assertEquals(payment1,paymentService.addPayment(payment1));
+		list.add(payment1);
+		assertEquals(payment1,paymentService.getPaymentDetails(9));
+		//paymentService.removePayment(5);
 	}
 
 	@Test
 	void testGetAllPaymentDetails() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(payment1.toString(),paymentService.addPayment(payment1).toString());
+		list.add(payment1);
+		assertEquals(list, paymentService.getAllPaymentDetails());
+		//paymentService.removePayment(8);
 	}
 
 	@Test
 	void testValidatePaymentType() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(true,service.validatePaymentType(payment1));
 	}
 
 	@Test
 	void testValidatePaymentStatus() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(true,service.validatePaymentStatus(payment1));
 	}
 
 	@Test
 	void testValidateCardName() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(true,service.validateCardName(payment1));
 	}
 
 	@Test
 	void testValidateCardNumber() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(true,service.validateCardNumber(payment1));
 	}
 
 	@Test
 	void testValidateCvv() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(true,service.validateCvv(payment1));
 	}
 
 	@Test
 	void testValidateCardExpiry() {
-		fail("Not yet implemented");
+		LocalDate expiryDate=LocalDate.parse("2025-07-01");
+		Payment payment1=new Payment(8,"debit","paid",8,"SyedSssam","124",expiryDate,258);
+		assertEquals(true,service.validateCvv(payment1));
 	}
 
 }
